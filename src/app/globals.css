@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-cream-50 font-sans text-ink-900 antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-serif text-leaf-700;
+    font-optical-sizing: auto;
+  }
+  ::selection {
+    @apply bg-genda-300 text-ink-900;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-saffron-600 ring-offset-cream-50;
+  }
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-16 sm:py-24;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-genda-300/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-ink-900;
+  }
+  /* Buttons use ink text on orange. White on orange fails WCAG AA. */
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition duration-200 ease-out;
+  }
+  .btn-primary {
+    @apply btn bg-marigold text-ink-900 shadow-warm hover:-translate-y-0.5 hover:shadow-warm-lg active:translate-y-0;
+  }
+  .btn-leaf {
+    @apply btn bg-leaf-700 text-cream-50 hover:-translate-y-0.5 hover:bg-forest-900;
+  }
+  .btn-ghost {
+    @apply btn border-2 border-leaf-700 text-leaf-700 hover:bg-leaf-700 hover:text-cream-50;
+  }
+  .btn-rani {
+    @apply btn bg-rani-500 text-white shadow-warm hover:-translate-y-0.5 hover:brightness-95;
+  }
+  .card {
+    @apply rounded-card bg-white/80 shadow-soft ring-1 ring-sand-100 transition duration-300 ease-out;
+  }
+  .card-lift {
+    @apply hover:-translate-y-1.5 hover:shadow-warm-lg;
+  }
+  .field {
+    @apply mt-1.5 block w-full rounded-2xl border-0 bg-white px-4 py-3 text-base text-ink-900 ring-1 ring-inset ring-sand-100 placeholder:text-ink-900/45 focus:ring-2 focus:ring-inset focus:ring-marigold-500;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-fall { animation: none !important; }
+  .petal { display: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+/* Scroll reveal. Only hides content once JS is running, so no-JS users still see everything. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+.js-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] { opacity: 1; transform: none; }
+}
